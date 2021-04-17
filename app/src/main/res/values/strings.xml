@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Datahop Demo</string>
+    <string name="node_id">Node ID</string>
+    <string name="node_addrs">Node Address</string>
+</resources>
