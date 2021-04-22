@@ -25,7 +25,6 @@
         android:text="@string/node_addrs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
