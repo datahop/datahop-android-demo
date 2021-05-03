@@ -8,9 +8,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import datahop.Datahop;
-import datahop.Hook;
+import datahop.ConnectionManager;
 
-public class MainActivity extends AppCompatActivity implements Hook {
+public class MainActivity extends AppCompatActivity implements ConnectionManager {
 
     private static final String root = ".datahop";
     ArrayList<String> activePeers = new ArrayList<>();
