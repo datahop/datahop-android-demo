@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import datahop.Datahop;
 import datahop.ConnectionManager;
+import datahop.types.Types;
 
 public class MainActivity extends AppCompatActivity implements ConnectionManager {
 
