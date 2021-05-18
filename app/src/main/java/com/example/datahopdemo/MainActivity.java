@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("Node Id", Datahop.getID());
+        Log.d("Node Id", Datahop.id());
         Log.d("Node Status onCreate", String.valueOf(Datahop.isNodeOnline()));
         if (!Datahop.isNodeOnline()) {
             try {
@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         super.onStart();
         Log.d("Node Status onStart", String.valueOf(Datahop.isNodeOnline()));
         try {
-            String Id = Datahop.getID();
+            String Id = Datahop.id();
             final TextView textViewID = this.findViewById(R.id.textview_id);
             textViewID.setText(Id);
 
-            String addrs = Datahop.getAddress();
+            String addrs = Datahop.addrs();
             final TextView textViewAddrs = this.findViewById(R.id.textview_address);
             textViewAddrs.setText(addrs);
         } catch (Exception e) {
