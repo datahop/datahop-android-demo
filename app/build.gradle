@@ -6,13 +6,13 @@ android {
 
     // SDK 30 is incompatible for gomobile net.InterfaceAddrs()
     // https://github.com/golang/go/issues/40569
-    compileSdkVersion 29
+    compileSdkVersion 28
     buildToolsVersion "30.0.1"
 
     defaultConfig {
         applicationId "com.example.datahopdemo"
-        minSdkVersion 16
-        targetSdkVersion 29
+        minSdkVersion 28
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -41,5 +41,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "com.google.protobuf:protobuf-java:3.15.8"
 
-    implementation fileTree(dir: "libs", include: ["*.aar"])
+    implementation(name: 'datahop', ext: 'aar')
+    implementation(name: 'blediscovery-release', ext: 'aar')
+    implementation(name: 'wifidirect-release', ext: 'aar')
 }
