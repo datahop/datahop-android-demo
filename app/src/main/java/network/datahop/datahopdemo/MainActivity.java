@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import datahop.Datahop;
@@ -69,12 +72,31 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             final TextView textViewID = this.findViewById(R.id.textview_id);
             textViewID.setText(Id);
 
-            String addrs = Datahop.addrs();
-            final TextView textViewAddrs = this.findViewById(R.id.textview_address);
-            textViewAddrs.setText(addrs);
+            final Button button = findViewById(R.id.button);
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Datahop.peers();
+                    Log.d("Online : ", String.valueOf(Datahop.isNodeOnline()));
+                    Log.d("Addrs : ", Datahop.addrs());
+                    Log.d("interface Addrs : ", Datahop.interfaceAddrs());
+                    Log.d("peers : ", Datahop.peers());
+                    try {
+                        Log.d("Size : ", String.valueOf(Datahop.diskUsage()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Datahop.stop();
+        Datahop.close();
     }
 
     @Override

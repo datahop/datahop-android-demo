@@ -18,6 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Stats"
+        tools:layout_editor_absoluteX="124dp"
+        tools:layout_editor_absoluteY="531dp" />
+
     <TextView
         android:id="@+id/textview_address"
         android:layout_width="wrap_content"
