@@ -22,12 +22,13 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
 
     private static final String root = ".datahop";
     ArrayList<String> activePeers = new ArrayList<>();
-
+    TextView textViewPeers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("-----Version :", Datahop.version());
+        textViewPeers = this.findViewById(R.id.textview_peers);
         try {
             BLEServiceDiscovery bleDiscoveryDriver = BLEServiceDiscovery.getInstance(getApplicationContext());
             BLEAdvertising bleAdvertisingDriver = BLEAdvertising.getInstance(getApplicationContext());
@@ -103,11 +104,21 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
     public void peerConnected(String s) {
         Log.d("*** Peer Connected ***", s);
         activePeers.add(s);
+        this.runOnUiThread(new Runnable() {
+            public void run() {
+                textViewPeers.setText(activePeers.toString());
+            }
+        });
     }
 
     @Override
     public void peerDisconnected(String s) {
         Log.d("* Peer Disconnected *", s);
         activePeers.remove(s);
+        this.runOnUiThread(new Runnable() {
+            public void run() {
+                textViewPeers.setText(activePeers.toString());
+            }
+        });
     }
 }

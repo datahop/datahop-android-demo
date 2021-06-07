@@ -27,10 +27,10 @@
         tools:layout_editor_absoluteY="531dp" />
 
     <TextView
-        android:id="@+id/textview_address"
+        android:id="@+id/textview_peers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/node_addrs"
+        android:text="@string/node_peers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_id" />
