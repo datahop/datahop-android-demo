@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="network.datahop.datahopdemo.MainActivity">
 
     <TextView
         android:id="@+id/textview_id"
@@ -19,10 +19,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_address"
+        android:id="@+id/textview_peers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/node_addrs"
+        android:text="@string/node_peers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_id" />
@@ -57,5 +57,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/startbutton"
         />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Stats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stopbutton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
