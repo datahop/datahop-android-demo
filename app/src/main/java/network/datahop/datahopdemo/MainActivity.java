@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import datahop.Datahop;
 import datahop.ConnectionManager;
@@ -81,8 +83,29 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                     Log.d("Addrs : ", Datahop.addrs());
                     Log.d("interface Addrs : ", Datahop.interfaceAddrs());
                     Log.d("peers : ", Datahop.peers());
+                    Log.d("State : ", String.valueOf(Datahop.state()));
+                    try {
+                        String tags = Datahop.getTags();
+                        Log.d("Tags", tags);
+                        String[] tarr = tags.split(",");
+                        if (tarr.length > 0) {
+                            String latestTag = tarr[tarr.length-1];
+                            Log.d("Latest Tag ", latestTag);
+                            byte[] value = Datahop.get(latestTag);
+                            Log.d("Latest Tag value ",  new String(value, StandardCharsets.UTF_8));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     try {
                         Log.d("Size : ", String.valueOf(Datahop.diskUsage()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    String unixTime = String.valueOf(System.currentTimeMillis() / 1000L);
+                    String value = "Stats called at "+unixTime;
+                    try {
+                        Datahop.add(unixTime, value.getBytes());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
