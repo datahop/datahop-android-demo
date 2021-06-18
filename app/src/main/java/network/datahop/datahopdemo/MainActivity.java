@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 import datahop.Datahop;
 import datahop.ConnectionManager;
+import datahop.types.Types;
 import network.datahop.blediscovery.BLEAdvertising;
 import network.datahop.blediscovery.BLEServiceDiscovery;
 import network.datahop.wifidirect.WifiDirectHotSpot;
@@ -78,18 +79,36 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             final Button button = findViewById(R.id.button);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Datahop.peers();
                     Log.d("Online : ", String.valueOf(Datahop.isNodeOnline()));
-                    Log.d("Addrs : ", Datahop.addrs());
-                    Log.d("interface Addrs : ", Datahop.interfaceAddrs());
-                    Log.d("peers : ", Datahop.peers());
-                    Log.d("State : ", String.valueOf(Datahop.state()));
                     try {
-                        String tags = Datahop.getTags();
-                        Log.d("Tags", tags);
-                        String[] tarr = tags.split(",");
-                        if (tarr.length > 0) {
-                            String latestTag = tarr[tarr.length-1];
+                        Types.StringSlice addrs = Types.StringSlice.parseFrom(Datahop.addrs());
+                        Log.d("Addrs : ", addrs.getOutputList().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d("State : ", String.valueOf(Datahop.state()));
+
+                    try {
+                        Types.StringSlice ifaceAddrs = Types.StringSlice.parseFrom(Datahop.interfaceAddrs());
+                        Log.d("IfaceAddrs : ", ifaceAddrs.getOutputList().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        Types.StringSlice peers = Types.StringSlice.parseFrom(Datahop.peers());
+                        Log.d("Peers : ", peers.getOutputList().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        Types.StringSlice tags = Types.StringSlice.parseFrom(Datahop.getTags());
+                        Log.d("Tags : ", tags.getOutputList().toString());
+
+                        if (tags.getOutputList().size() > 0) {
+                            String latestTag = tags.getOutput(tags.getOutputList().size()-1);
                             Log.d("Latest Tag ", latestTag);
                             byte[] value = Datahop.get(latestTag);
                             Log.d("Latest Tag value ",  new String(value, StandardCharsets.UTF_8));
@@ -97,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                     try {
                         Log.d("Size : ", String.valueOf(Datahop.diskUsage()));
                     } catch (Exception e) {
@@ -119,6 +139,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         Datahop.stop();
         Datahop.close();
     }

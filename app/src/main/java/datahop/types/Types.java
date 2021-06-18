@@ -14,50 +14,56 @@ public final class Types {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface ReplicaOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Replica)
+  public interface StringSliceOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:StringSlice)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string key = 1;</code>
-     * @return The key.
+     * <code>repeated string output = 1;</code>
+     * @return A list containing the output.
      */
-    java.lang.String getKey();
+    java.util.List<java.lang.String>
+        getOutputList();
     /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
+     * <code>repeated string output = 1;</code>
+     * @return The count of output.
+     */
+    int getOutputCount();
+    /**
+     * <code>repeated string output = 1;</code>
+     * @param index The index of the element to return.
+     * @return The output at the given index.
+     */
+    java.lang.String getOutput(int index);
+    /**
+     * <code>repeated string output = 1;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the output at the given index.
      */
     com.google.protobuf.ByteString
-        getKeyBytes();
-
-    /**
-     * <code>bytes value = 2;</code>
-     * @return The value.
-     */
-    com.google.protobuf.ByteString getValue();
+        getOutputBytes(int index);
   }
   /**
-   * Protobuf type {@code Replica}
+   * Protobuf type {@code StringSlice}
    */
-  public static final class Replica extends
+  public static final class StringSlice extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Replica)
-      ReplicaOrBuilder {
+      // @@protoc_insertion_point(message_implements:StringSlice)
+      StringSliceOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use Replica.newBuilder() to construct.
-    private Replica(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use StringSlice.newBuilder() to construct.
+    private StringSlice(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private Replica() {
-      key_ = "";
-      value_ = com.google.protobuf.ByteString.EMPTY;
+    private StringSlice() {
+      output_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new Replica();
+      return new StringSlice();
     }
 
     @java.lang.Override
@@ -65,654 +71,7 @@ public final class Types {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Replica(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              key_ = s;
-              break;
-            }
-            case 18: {
-
-              value_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return datahop.types.Types.internal_static_Replica_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return datahop.types.Types.internal_static_Replica_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              datahop.types.Types.Replica.class, datahop.types.Types.Replica.Builder.class);
-    }
-
-    public static final int KEY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object key_;
-    /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    @java.lang.Override
-    public java.lang.String getKey() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        key_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getKeyBytes() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        key_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int VALUE_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString value_;
-    /**
-     * <code>bytes value = 2;</code>
-     * @return The value.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString getValue() {
-      return value_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
-      }
-      if (!value_.isEmpty()) {
-        output.writeBytes(2, value_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
-      }
-      if (!value_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, value_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof datahop.types.Types.Replica)) {
-        return super.equals(obj);
-      }
-      datahop.types.Types.Replica other = (datahop.types.Types.Replica) obj;
-
-      if (!getKey()
-          .equals(other.getKey())) return false;
-      if (!getValue()
-          .equals(other.getValue())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + KEY_FIELD_NUMBER;
-      hash = (53 * hash) + getKey().hashCode();
-      hash = (37 * hash) + VALUE_FIELD_NUMBER;
-      hash = (53 * hash) + getValue().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static datahop.types.Types.Replica parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static datahop.types.Types.Replica parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static datahop.types.Types.Replica parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static datahop.types.Types.Replica parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static datahop.types.Types.Replica parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static datahop.types.Types.Replica parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static datahop.types.Types.Replica parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static datahop.types.Types.Replica parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static datahop.types.Types.Replica parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static datahop.types.Types.Replica parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static datahop.types.Types.Replica parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static datahop.types.Types.Replica parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(datahop.types.Types.Replica prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code Replica}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Replica)
-        datahop.types.Types.ReplicaOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return datahop.types.Types.internal_static_Replica_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return datahop.types.Types.internal_static_Replica_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                datahop.types.Types.Replica.class, datahop.types.Types.Replica.Builder.class);
-      }
-
-      // Construct using datahop.types.Types.Replica.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        key_ = "";
-
-        value_ = com.google.protobuf.ByteString.EMPTY;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return datahop.types.Types.internal_static_Replica_descriptor;
-      }
-
-      @java.lang.Override
-      public datahop.types.Types.Replica getDefaultInstanceForType() {
-        return datahop.types.Types.Replica.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public datahop.types.Types.Replica build() {
-        datahop.types.Types.Replica result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public datahop.types.Types.Replica buildPartial() {
-        datahop.types.Types.Replica result = new datahop.types.Types.Replica(this);
-        result.key_ = key_;
-        result.value_ = value_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof datahop.types.Types.Replica) {
-          return mergeFrom((datahop.types.Types.Replica)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(datahop.types.Types.Replica other) {
-        if (other == datahop.types.Types.Replica.getDefaultInstance()) return this;
-        if (!other.getKey().isEmpty()) {
-          key_ = other.key_;
-          onChanged();
-        }
-        if (other.getValue() != com.google.protobuf.ByteString.EMPTY) {
-          setValue(other.getValue());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        datahop.types.Types.Replica parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (datahop.types.Types.Replica) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object key_ = "";
-      /**
-       * <code>string key = 1;</code>
-       * @return The key.
-       */
-      public java.lang.String getKey() {
-        java.lang.Object ref = key_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          key_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return The bytes for key.
-       */
-      public com.google.protobuf.ByteString
-          getKeyBytes() {
-        java.lang.Object ref = key_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          key_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKey(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        key_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearKey() {
-        
-        key_ = getDefaultInstance().getKey();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The bytes for key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKeyBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        key_ = value;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes value = 2;</code>
-       * @return The value.
-       */
-      @java.lang.Override
-      public com.google.protobuf.ByteString getValue() {
-        return value_;
-      }
-      /**
-       * <code>bytes value = 2;</code>
-       * @param value The value to set.
-       * @return This builder for chaining.
-       */
-      public Builder setValue(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        value_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes value = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearValue() {
-        
-        value_ = getDefaultInstance().getValue();
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:Replica)
-    }
-
-    // @@protoc_insertion_point(class_scope:Replica)
-    private static final datahop.types.Types.Replica DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new datahop.types.Types.Replica();
-    }
-
-    public static datahop.types.Types.Replica getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<Replica>
-        PARSER = new com.google.protobuf.AbstractParser<Replica>() {
-      @java.lang.Override
-      public Replica parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Replica(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Replica> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Replica> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public datahop.types.Types.Replica getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ContentOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Content)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>repeated .Replica replicas = 1;</code>
-     */
-    java.util.List<datahop.types.Types.Replica> 
-        getReplicasList();
-    /**
-     * <code>repeated .Replica replicas = 1;</code>
-     */
-    datahop.types.Types.Replica getReplicas(int index);
-    /**
-     * <code>repeated .Replica replicas = 1;</code>
-     */
-    int getReplicasCount();
-    /**
-     * <code>repeated .Replica replicas = 1;</code>
-     */
-    java.util.List<? extends datahop.types.Types.ReplicaOrBuilder> 
-        getReplicasOrBuilderList();
-    /**
-     * <code>repeated .Replica replicas = 1;</code>
-     */
-    datahop.types.Types.ReplicaOrBuilder getReplicasOrBuilder(
-        int index);
-  }
-  /**
-   * Protobuf type {@code Content}
-   */
-  public static final class Content extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Content)
-      ContentOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use Content.newBuilder() to construct.
-    private Content(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private Content() {
-      replicas_ = java.util.Collections.emptyList();
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Content();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Content(
+    private StringSlice(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -732,12 +91,12 @@ public final class Types {
               done = true;
               break;
             case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                replicas_ = new java.util.ArrayList<datahop.types.Types.Replica>();
+                output_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000001;
               }
-              replicas_.add(
-                  input.readMessage(datahop.types.Types.Replica.parser(), extensionRegistry));
+              output_.add(s);
               break;
             }
             default: {
@@ -756,7 +115,7 @@ public final class Types {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          replicas_ = java.util.Collections.unmodifiableList(replicas_);
+          output_ = output_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -764,55 +123,50 @@ public final class Types {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return datahop.types.Types.internal_static_Content_descriptor;
+      return datahop.types.Types.internal_static_StringSlice_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return datahop.types.Types.internal_static_Content_fieldAccessorTable
+      return datahop.types.Types.internal_static_StringSlice_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              datahop.types.Types.Content.class, datahop.types.Types.Content.Builder.class);
+              datahop.types.Types.StringSlice.class, datahop.types.Types.StringSlice.Builder.class);
     }
 
-    public static final int REPLICAS_FIELD_NUMBER = 1;
-    private java.util.List<datahop.types.Types.Replica> replicas_;
+    public static final int OUTPUT_FIELD_NUMBER = 1;
+    private com.google.protobuf.LazyStringList output_;
     /**
-     * <code>repeated .Replica replicas = 1;</code>
+     * <code>repeated string output = 1;</code>
+     * @return A list containing the output.
      */
-    @java.lang.Override
-    public java.util.List<datahop.types.Types.Replica> getReplicasList() {
-      return replicas_;
+    public com.google.protobuf.ProtocolStringList
+        getOutputList() {
+      return output_;
     }
     /**
-     * <code>repeated .Replica replicas = 1;</code>
+     * <code>repeated string output = 1;</code>
+     * @return The count of output.
      */
-    @java.lang.Override
-    public java.util.List<? extends datahop.types.Types.ReplicaOrBuilder> 
-        getReplicasOrBuilderList() {
-      return replicas_;
+    public int getOutputCount() {
+      return output_.size();
     }
     /**
-     * <code>repeated .Replica replicas = 1;</code>
+     * <code>repeated string output = 1;</code>
+     * @param index The index of the element to return.
+     * @return The output at the given index.
      */
-    @java.lang.Override
-    public int getReplicasCount() {
-      return replicas_.size();
+    public java.lang.String getOutput(int index) {
+      return output_.get(index);
     }
     /**
-     * <code>repeated .Replica replicas = 1;</code>
+     * <code>repeated string output = 1;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the output at the given index.
      */
-    @java.lang.Override
-    public datahop.types.Types.Replica getReplicas(int index) {
-      return replicas_.get(index);
-    }
-    /**
-     * <code>repeated .Replica replicas = 1;</code>
-     */
-    @java.lang.Override
-    public datahop.types.Types.ReplicaOrBuilder getReplicasOrBuilder(
-        int index) {
-      return replicas_.get(index);
+    public com.google.protobuf.ByteString
+        getOutputBytes(int index) {
+      return output_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -829,8 +183,8 @@ public final class Types {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < replicas_.size(); i++) {
-        output.writeMessage(1, replicas_.get(i));
+      for (int i = 0; i < output_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, output_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -841,9 +195,13 @@ public final class Types {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < replicas_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, replicas_.get(i));
+      {
+        int dataSize = 0;
+        for (int i = 0; i < output_.size(); i++) {
+          dataSize += computeStringSizeNoTag(output_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getOutputList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -855,13 +213,13 @@ public final class Types {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof datahop.types.Types.Content)) {
+      if (!(obj instanceof datahop.types.Types.StringSlice)) {
         return super.equals(obj);
       }
-      datahop.types.Types.Content other = (datahop.types.Types.Content) obj;
+      datahop.types.Types.StringSlice other = (datahop.types.Types.StringSlice) obj;
 
-      if (!getReplicasList()
-          .equals(other.getReplicasList())) return false;
+      if (!getOutputList()
+          .equals(other.getOutputList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -873,78 +231,78 @@ public final class Types {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getReplicasCount() > 0) {
-        hash = (37 * hash) + REPLICAS_FIELD_NUMBER;
-        hash = (53 * hash) + getReplicasList().hashCode();
+      if (getOutputCount() > 0) {
+        hash = (37 * hash) + OUTPUT_FIELD_NUMBER;
+        hash = (53 * hash) + getOutputList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static datahop.types.Types.Content parseFrom(
+    public static datahop.types.Types.StringSlice parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static datahop.types.Types.Content parseFrom(
+    public static datahop.types.Types.StringSlice parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static datahop.types.Types.Content parseFrom(
+    public static datahop.types.Types.StringSlice parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static datahop.types.Types.Content parseFrom(
+    public static datahop.types.Types.StringSlice parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static datahop.types.Types.Content parseFrom(byte[] data)
+    public static datahop.types.Types.StringSlice parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static datahop.types.Types.Content parseFrom(
+    public static datahop.types.Types.StringSlice parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static datahop.types.Types.Content parseFrom(java.io.InputStream input)
+    public static datahop.types.Types.StringSlice parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static datahop.types.Types.Content parseFrom(
+    public static datahop.types.Types.StringSlice parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static datahop.types.Types.Content parseDelimitedFrom(java.io.InputStream input)
+    public static datahop.types.Types.StringSlice parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static datahop.types.Types.Content parseDelimitedFrom(
+    public static datahop.types.Types.StringSlice parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static datahop.types.Types.Content parseFrom(
+    public static datahop.types.Types.StringSlice parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static datahop.types.Types.Content parseFrom(
+    public static datahop.types.Types.StringSlice parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -957,7 +315,7 @@ public final class Types {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(datahop.types.Types.Content prototype) {
+    public static Builder newBuilder(datahop.types.Types.StringSlice prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -973,26 +331,26 @@ public final class Types {
       return builder;
     }
     /**
-     * Protobuf type {@code Content}
+     * Protobuf type {@code StringSlice}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Content)
-        datahop.types.Types.ContentOrBuilder {
+        // @@protoc_insertion_point(builder_implements:StringSlice)
+        datahop.types.Types.StringSliceOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return datahop.types.Types.internal_static_Content_descriptor;
+        return datahop.types.Types.internal_static_StringSlice_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return datahop.types.Types.internal_static_Content_fieldAccessorTable
+        return datahop.types.Types.internal_static_StringSlice_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                datahop.types.Types.Content.class, datahop.types.Types.Content.Builder.class);
+                datahop.types.Types.StringSlice.class, datahop.types.Types.StringSlice.Builder.class);
       }
 
-      // Construct using datahop.types.Types.Content.newBuilder()
+      // Construct using datahop.types.Types.StringSlice.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1005,35 +363,30 @@ public final class Types {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getReplicasFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (replicasBuilder_ == null) {
-          replicas_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        } else {
-          replicasBuilder_.clear();
-        }
+        output_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return datahop.types.Types.internal_static_Content_descriptor;
+        return datahop.types.Types.internal_static_StringSlice_descriptor;
       }
 
       @java.lang.Override
-      public datahop.types.Types.Content getDefaultInstanceForType() {
-        return datahop.types.Types.Content.getDefaultInstance();
+      public datahop.types.Types.StringSlice getDefaultInstanceForType() {
+        return datahop.types.Types.StringSlice.getDefaultInstance();
       }
 
       @java.lang.Override
-      public datahop.types.Types.Content build() {
-        datahop.types.Types.Content result = buildPartial();
+      public datahop.types.Types.StringSlice build() {
+        datahop.types.Types.StringSlice result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1041,18 +394,14 @@ public final class Types {
       }
 
       @java.lang.Override
-      public datahop.types.Types.Content buildPartial() {
-        datahop.types.Types.Content result = new datahop.types.Types.Content(this);
+      public datahop.types.Types.StringSlice buildPartial() {
+        datahop.types.Types.StringSlice result = new datahop.types.Types.StringSlice(this);
         int from_bitField0_ = bitField0_;
-        if (replicasBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
-            replicas_ = java.util.Collections.unmodifiableList(replicas_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
-          result.replicas_ = replicas_;
-        } else {
-          result.replicas_ = replicasBuilder_.build();
+        if (((bitField0_ & 0x00000001) != 0)) {
+          output_ = output_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
+        result.output_ = output_;
         onBuilt();
         return result;
       }
@@ -1091,41 +440,25 @@ public final class Types {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof datahop.types.Types.Content) {
-          return mergeFrom((datahop.types.Types.Content)other);
+        if (other instanceof datahop.types.Types.StringSlice) {
+          return mergeFrom((datahop.types.Types.StringSlice)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(datahop.types.Types.Content other) {
-        if (other == datahop.types.Types.Content.getDefaultInstance()) return this;
-        if (replicasBuilder_ == null) {
-          if (!other.replicas_.isEmpty()) {
-            if (replicas_.isEmpty()) {
-              replicas_ = other.replicas_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-            } else {
-              ensureReplicasIsMutable();
-              replicas_.addAll(other.replicas_);
-            }
-            onChanged();
+      public Builder mergeFrom(datahop.types.Types.StringSlice other) {
+        if (other == datahop.types.Types.StringSlice.getDefaultInstance()) return this;
+        if (!other.output_.isEmpty()) {
+          if (output_.isEmpty()) {
+            output_ = other.output_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureOutputIsMutable();
+            output_.addAll(other.output_);
           }
-        } else {
-          if (!other.replicas_.isEmpty()) {
-            if (replicasBuilder_.isEmpty()) {
-              replicasBuilder_.dispose();
-              replicasBuilder_ = null;
-              replicas_ = other.replicas_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              replicasBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getReplicasFieldBuilder() : null;
-            } else {
-              replicasBuilder_.addAllMessages(other.replicas_);
-            }
-          }
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1142,11 +475,11 @@ public final class Types {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        datahop.types.Types.Content parsedMessage = null;
+        datahop.types.Types.StringSlice parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (datahop.types.Types.Content) e.getUnfinishedMessage();
+          parsedMessage = (datahop.types.Types.StringSlice) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1157,244 +490,114 @@ public final class Types {
       }
       private int bitField0_;
 
-      private java.util.List<datahop.types.Types.Replica> replicas_ =
-        java.util.Collections.emptyList();
-      private void ensureReplicasIsMutable() {
+      private com.google.protobuf.LazyStringList output_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureOutputIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          replicas_ = new java.util.ArrayList<datahop.types.Types.Replica>(replicas_);
+          output_ = new com.google.protobuf.LazyStringArrayList(output_);
           bitField0_ |= 0x00000001;
          }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          datahop.types.Types.Replica, datahop.types.Types.Replica.Builder, datahop.types.Types.ReplicaOrBuilder> replicasBuilder_;
-
       /**
-       * <code>repeated .Replica replicas = 1;</code>
+       * <code>repeated string output = 1;</code>
+       * @return A list containing the output.
        */
-      public java.util.List<datahop.types.Types.Replica> getReplicasList() {
-        if (replicasBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(replicas_);
-        } else {
-          return replicasBuilder_.getMessageList();
-        }
+      public com.google.protobuf.ProtocolStringList
+          getOutputList() {
+        return output_.getUnmodifiableView();
       }
       /**
-       * <code>repeated .Replica replicas = 1;</code>
+       * <code>repeated string output = 1;</code>
+       * @return The count of output.
        */
-      public int getReplicasCount() {
-        if (replicasBuilder_ == null) {
-          return replicas_.size();
-        } else {
-          return replicasBuilder_.getCount();
-        }
+      public int getOutputCount() {
+        return output_.size();
       }
       /**
-       * <code>repeated .Replica replicas = 1;</code>
+       * <code>repeated string output = 1;</code>
+       * @param index The index of the element to return.
+       * @return The output at the given index.
        */
-      public datahop.types.Types.Replica getReplicas(int index) {
-        if (replicasBuilder_ == null) {
-          return replicas_.get(index);
-        } else {
-          return replicasBuilder_.getMessage(index);
-        }
+      public java.lang.String getOutput(int index) {
+        return output_.get(index);
       }
       /**
-       * <code>repeated .Replica replicas = 1;</code>
+       * <code>repeated string output = 1;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the output at the given index.
        */
-      public Builder setReplicas(
-          int index, datahop.types.Types.Replica value) {
-        if (replicasBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureReplicasIsMutable();
-          replicas_.set(index, value);
-          onChanged();
-        } else {
-          replicasBuilder_.setMessage(index, value);
-        }
+      public com.google.protobuf.ByteString
+          getOutputBytes(int index) {
+        return output_.getByteString(index);
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @param index The index to set the value at.
+       * @param value The output to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOutput(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOutputIsMutable();
+        output_.set(index, value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .Replica replicas = 1;</code>
+       * <code>repeated string output = 1;</code>
+       * @param value The output to add.
+       * @return This builder for chaining.
        */
-      public Builder setReplicas(
-          int index, datahop.types.Types.Replica.Builder builderForValue) {
-        if (replicasBuilder_ == null) {
-          ensureReplicasIsMutable();
-          replicas_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          replicasBuilder_.setMessage(index, builderForValue.build());
-        }
+      public Builder addOutput(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOutputIsMutable();
+        output_.add(value);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .Replica replicas = 1;</code>
+       * <code>repeated string output = 1;</code>
+       * @param values The output to add.
+       * @return This builder for chaining.
        */
-      public Builder addReplicas(datahop.types.Types.Replica value) {
-        if (replicasBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureReplicasIsMutable();
-          replicas_.add(value);
-          onChanged();
-        } else {
-          replicasBuilder_.addMessage(value);
-        }
+      public Builder addAllOutput(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureOutputIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, output_);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .Replica replicas = 1;</code>
+       * <code>repeated string output = 1;</code>
+       * @return This builder for chaining.
        */
-      public Builder addReplicas(
-          int index, datahop.types.Types.Replica value) {
-        if (replicasBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureReplicasIsMutable();
-          replicas_.add(index, value);
-          onChanged();
-        } else {
-          replicasBuilder_.addMessage(index, value);
-        }
+      public Builder clearOutput() {
+        output_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .Replica replicas = 1;</code>
+       * <code>repeated string output = 1;</code>
+       * @param value The bytes of the output to add.
+       * @return This builder for chaining.
        */
-      public Builder addReplicas(
-          datahop.types.Types.Replica.Builder builderForValue) {
-        if (replicasBuilder_ == null) {
-          ensureReplicasIsMutable();
-          replicas_.add(builderForValue.build());
-          onChanged();
-        } else {
-          replicasBuilder_.addMessage(builderForValue.build());
-        }
+      public Builder addOutputBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureOutputIsMutable();
+        output_.add(value);
+        onChanged();
         return this;
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public Builder addReplicas(
-          int index, datahop.types.Types.Replica.Builder builderForValue) {
-        if (replicasBuilder_ == null) {
-          ensureReplicasIsMutable();
-          replicas_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          replicasBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public Builder addAllReplicas(
-          java.lang.Iterable<? extends datahop.types.Types.Replica> values) {
-        if (replicasBuilder_ == null) {
-          ensureReplicasIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, replicas_);
-          onChanged();
-        } else {
-          replicasBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public Builder clearReplicas() {
-        if (replicasBuilder_ == null) {
-          replicas_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-          onChanged();
-        } else {
-          replicasBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public Builder removeReplicas(int index) {
-        if (replicasBuilder_ == null) {
-          ensureReplicasIsMutable();
-          replicas_.remove(index);
-          onChanged();
-        } else {
-          replicasBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public datahop.types.Types.Replica.Builder getReplicasBuilder(
-          int index) {
-        return getReplicasFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public datahop.types.Types.ReplicaOrBuilder getReplicasOrBuilder(
-          int index) {
-        if (replicasBuilder_ == null) {
-          return replicas_.get(index);  } else {
-          return replicasBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public java.util.List<? extends datahop.types.Types.ReplicaOrBuilder> 
-           getReplicasOrBuilderList() {
-        if (replicasBuilder_ != null) {
-          return replicasBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(replicas_);
-        }
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public datahop.types.Types.Replica.Builder addReplicasBuilder() {
-        return getReplicasFieldBuilder().addBuilder(
-            datahop.types.Types.Replica.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public datahop.types.Types.Replica.Builder addReplicasBuilder(
-          int index) {
-        return getReplicasFieldBuilder().addBuilder(
-            index, datahop.types.Types.Replica.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Replica replicas = 1;</code>
-       */
-      public java.util.List<datahop.types.Types.Replica.Builder> 
-           getReplicasBuilderList() {
-        return getReplicasFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          datahop.types.Types.Replica, datahop.types.Types.Replica.Builder, datahop.types.Types.ReplicaOrBuilder> 
-          getReplicasFieldBuilder() {
-        if (replicasBuilder_ == null) {
-          replicasBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              datahop.types.Types.Replica, datahop.types.Types.Replica.Builder, datahop.types.Types.ReplicaOrBuilder>(
-                  replicas_,
-                  ((bitField0_ & 0x00000001) != 0),
-                  getParentForChildren(),
-                  isClean());
-          replicas_ = null;
-        }
-        return replicasBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1409,56 +612,694 @@ public final class Types {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:Content)
+      // @@protoc_insertion_point(builder_scope:StringSlice)
     }
 
-    // @@protoc_insertion_point(class_scope:Content)
-    private static final datahop.types.Types.Content DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:StringSlice)
+    private static final datahop.types.Types.StringSlice DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new datahop.types.Types.Content();
+      DEFAULT_INSTANCE = new datahop.types.Types.StringSlice();
     }
 
-    public static datahop.types.Types.Content getDefaultInstance() {
+    public static datahop.types.Types.StringSlice getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<Content>
-        PARSER = new com.google.protobuf.AbstractParser<Content>() {
+    private static final com.google.protobuf.Parser<StringSlice>
+        PARSER = new com.google.protobuf.AbstractParser<StringSlice>() {
       @java.lang.Override
-      public Content parsePartialFrom(
+      public StringSlice parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Content(input, extensionRegistry);
+        return new StringSlice(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<Content> parser() {
+    public static com.google.protobuf.Parser<StringSlice> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<Content> getParserForType() {
+    public com.google.protobuf.Parser<StringSlice> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public datahop.types.Types.Content getDefaultInstanceForType() {
+    public datahop.types.Types.StringSlice getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface StringOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:String)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated string output = 1;</code>
+     * @return A list containing the output.
+     */
+    java.util.List<java.lang.String>
+        getOutputList();
+    /**
+     * <code>repeated string output = 1;</code>
+     * @return The count of output.
+     */
+    int getOutputCount();
+    /**
+     * <code>repeated string output = 1;</code>
+     * @param index The index of the element to return.
+     * @return The output at the given index.
+     */
+    java.lang.String getOutput(int index);
+    /**
+     * <code>repeated string output = 1;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the output at the given index.
+     */
+    com.google.protobuf.ByteString
+        getOutputBytes(int index);
+  }
+  /**
+   * Protobuf type {@code String}
+   */
+  public static final class String extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:String)
+      StringOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use String.newBuilder() to construct.
+    private String(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private String() {
+      output_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new String();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private String(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                output_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              output_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          output_ = output_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return datahop.types.Types.internal_static_String_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return datahop.types.Types.internal_static_String_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              datahop.types.Types.String.class, datahop.types.Types.String.Builder.class);
+    }
+
+    public static final int OUTPUT_FIELD_NUMBER = 1;
+    private com.google.protobuf.LazyStringList output_;
+    /**
+     * <code>repeated string output = 1;</code>
+     * @return A list containing the output.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getOutputList() {
+      return output_;
+    }
+    /**
+     * <code>repeated string output = 1;</code>
+     * @return The count of output.
+     */
+    public int getOutputCount() {
+      return output_.size();
+    }
+    /**
+     * <code>repeated string output = 1;</code>
+     * @param index The index of the element to return.
+     * @return The output at the given index.
+     */
+    public java.lang.String getOutput(int index) {
+      return output_.get(index);
+    }
+    /**
+     * <code>repeated string output = 1;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the output at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getOutputBytes(int index) {
+      return output_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < output_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, output_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < output_.size(); i++) {
+          dataSize += computeStringSizeNoTag(output_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getOutputList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof datahop.types.Types.String)) {
+        return super.equals(obj);
+      }
+      datahop.types.Types.String other = (datahop.types.Types.String) obj;
+
+      if (!getOutputList()
+          .equals(other.getOutputList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getOutputCount() > 0) {
+        hash = (37 * hash) + OUTPUT_FIELD_NUMBER;
+        hash = (53 * hash) + getOutputList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static datahop.types.Types.String parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static datahop.types.Types.String parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static datahop.types.Types.String parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static datahop.types.Types.String parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static datahop.types.Types.String parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static datahop.types.Types.String parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static datahop.types.Types.String parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static datahop.types.Types.String parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static datahop.types.Types.String parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static datahop.types.Types.String parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static datahop.types.Types.String parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static datahop.types.Types.String parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(datahop.types.Types.String prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code String}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:String)
+        datahop.types.Types.StringOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return datahop.types.Types.internal_static_String_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return datahop.types.Types.internal_static_String_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                datahop.types.Types.String.class, datahop.types.Types.String.Builder.class);
+      }
+
+      // Construct using datahop.types.Types.String.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        output_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return datahop.types.Types.internal_static_String_descriptor;
+      }
+
+      @java.lang.Override
+      public datahop.types.Types.String getDefaultInstanceForType() {
+        return datahop.types.Types.String.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public datahop.types.Types.String build() {
+        datahop.types.Types.String result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public datahop.types.Types.String buildPartial() {
+        datahop.types.Types.String result = new datahop.types.Types.String(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          output_ = output_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.output_ = output_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof datahop.types.Types.String) {
+          return mergeFrom((datahop.types.Types.String)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(datahop.types.Types.String other) {
+        if (other == datahop.types.Types.String.getDefaultInstance()) return this;
+        if (!other.output_.isEmpty()) {
+          if (output_.isEmpty()) {
+            output_ = other.output_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureOutputIsMutable();
+            output_.addAll(other.output_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        datahop.types.Types.String parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (datahop.types.Types.String) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.LazyStringList output_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureOutputIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          output_ = new com.google.protobuf.LazyStringArrayList(output_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @return A list containing the output.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getOutputList() {
+        return output_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @return The count of output.
+       */
+      public int getOutputCount() {
+        return output_.size();
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @param index The index of the element to return.
+       * @return The output at the given index.
+       */
+      public java.lang.String getOutput(int index) {
+        return output_.get(index);
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the output at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getOutputBytes(int index) {
+        return output_.getByteString(index);
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @param index The index to set the value at.
+       * @param value The output to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOutput(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOutputIsMutable();
+        output_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @param value The output to add.
+       * @return This builder for chaining.
+       */
+      public Builder addOutput(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOutputIsMutable();
+        output_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @param values The output to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllOutput(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureOutputIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, output_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOutput() {
+        output_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string output = 1;</code>
+       * @param value The bytes of the output to add.
+       * @return This builder for chaining.
+       */
+      public Builder addOutputBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureOutputIsMutable();
+        output_.add(value);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:String)
+    }
+
+    // @@protoc_insertion_point(class_scope:String)
+    private static final datahop.types.Types.String DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new datahop.types.Types.String();
+    }
+
+    public static datahop.types.Types.String getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<String>
+        PARSER = new com.google.protobuf.AbstractParser<String>() {
+      @java.lang.Override
+      public String parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new String(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<String> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<String> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public datahop.types.Types.String getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Replica_descriptor;
+    internal_static_StringSlice_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Replica_fieldAccessorTable;
+      internal_static_StringSlice_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Content_descriptor;
+    internal_static_String_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Content_fieldAccessorTable;
+      internal_static_String_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1468,26 +1309,26 @@ public final class Types {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013types.proto\"%\n\007Replica\022\013\n\003key\030\001 \001(\t\022\r\n" +
-      "\005value\030\002 \001(\014\"%\n\007Content\022\032\n\010replicas\030\001 \003(" +
-      "\0132\010.ReplicaB\017\n\rdatahop.typesb\006proto3"
+      "\n\013types.proto\"\035\n\013StringSlice\022\016\n\006output\030\001" +
+      " \003(\t\"\030\n\006String\022\016\n\006output\030\001 \003(\tB\017\n\rdataho" +
+      "p.typesb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_Replica_descriptor =
+    internal_static_StringSlice_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_Replica_fieldAccessorTable = new
+    internal_static_StringSlice_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Replica_descriptor,
-        new java.lang.String[] { "Key", "Value", });
-    internal_static_Content_descriptor =
+        internal_static_StringSlice_descriptor,
+        new java.lang.String[] { "Output", });
+    internal_static_String_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_Content_fieldAccessorTable = new
+    internal_static_String_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Content_descriptor,
-        new java.lang.String[] { "Replicas", });
+        internal_static_String_descriptor,
+        new java.lang.String[] { "Output", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
