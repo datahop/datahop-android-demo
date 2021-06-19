@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import datahop.Datahop;
@@ -87,7 +88,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                         e.printStackTrace();
                     }
 
-                    Log.d("State : ", String.valueOf(Datahop.state()));
+                    try {
+                        Log.d("State : ", Datahop.state().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     try {
                         Types.StringSlice ifaceAddrs = Types.StringSlice.parseFrom(Datahop.interfaceAddrs());
