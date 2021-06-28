@@ -8,11 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 import datahop.Datahop;
 import datahop.ConnectionManager;
@@ -77,33 +74,35 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             final TextView textViewID = this.findViewById(R.id.textview_id);
             textViewID.setText(Id);
 
-            final Button button = findViewById(R.id.button);
-            button.setOnClickListener(new View.OnClickListener() {
+            final Button logButton = findViewById(R.id.log_button);
+            logButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Log.d("Online : ", String.valueOf(Datahop.isNodeOnline()));
-                    try {
-                        Types.StringSlice addrs = Types.StringSlice.parseFrom(Datahop.addrs());
-                        Log.d("Addrs : ", addrs.getOutputList().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    if(Datahop.isNodeOnline()) {
+                        try {
+                            Types.StringSlice addrs = Types.StringSlice.parseFrom(Datahop.addrs());
+                            Log.d("Addrs : ", addrs.getOutputList().toString());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            Types.StringSlice ifaceAddrs = Types.StringSlice.parseFrom(Datahop.interfaceAddrs());
+                            Log.d("IfaceAddrs : ", ifaceAddrs.getOutputList().toString());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            Types.StringSlice peers = Types.StringSlice.parseFrom(Datahop.peers());
+                            Log.d("Peers : ", peers.getOutputList().toString());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     try {
                         Log.d("State : ", Datahop.state().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        Types.StringSlice ifaceAddrs = Types.StringSlice.parseFrom(Datahop.interfaceAddrs());
-                        Log.d("IfaceAddrs : ", ifaceAddrs.getOutputList().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        Types.StringSlice peers = Types.StringSlice.parseFrom(Datahop.peers());
-                        Log.d("Peers : ", peers.getOutputList().toString());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -127,12 +126,48 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    String unixTime = String.valueOf(System.currentTimeMillis() / 1000L);
-                    String value = "Stats called at "+unixTime;
-                    try {
-                        Datahop.add(unixTime, value.getBytes());
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                }
+            });
+
+            final Button startButton = findViewById(R.id.start_button);
+            startButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if(!Datahop.isNodeOnline()) {
+                        try {
+                            Datahop.startDiscovery();
+                            Datahop.start();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            final Button stopButton = findViewById(R.id.stop_button);
+            stopButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if(Datahop.isNodeOnline()) {
+                        try {
+                            Datahop.stopDiscovery();
+                            Datahop.stop();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            final Button contentButton = findViewById(R.id.add_content);
+            contentButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if(Datahop.isNodeOnline()) {
+                        String unixTime = String.valueOf(System.currentTimeMillis() / 1000L);
+                        String value = "Stats called at "+unixTime;
+                        try {
+                            Datahop.add(unixTime, value.getBytes());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });
@@ -149,7 +184,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Datahop.stop();
+        if(Datahop.isNodeOnline()) {
+            Datahop.stop();
+        }
         Datahop.close();
     }
 

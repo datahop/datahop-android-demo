@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/textview_id" />
 
     <Button
-        android:id="@+id/refreshbutton"
+        android:id="@+id/add_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update status"
@@ -39,32 +39,32 @@
         />
 
     <Button
-        android:id="@+id/startbutton"
+        android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/refreshbutton"
+        app:layout_constraintTop_toBottomOf="@id/add_content"
         />
 
     <Button
-        android:id="@+id/stopbutton"
+        android:id="@+id/stop_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/startbutton"
+        app:layout_constraintTop_toBottomOf="@id/start_button"
         />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/log_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log Stats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stopbutton" />
+        app:layout_constraintTop_toBottomOf="@id/stop_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
