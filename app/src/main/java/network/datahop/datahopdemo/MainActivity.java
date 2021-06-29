@@ -1,7 +1,11 @@
 package network.datahop.datahopdemo;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +26,10 @@ import network.datahop.wifidirect.WifiLink;
 public class MainActivity extends AppCompatActivity implements ConnectionManager {
 
     private static final String root = ".datahop";
+    private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
+    private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 2;
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     ArrayList<String> activePeers = new ArrayList<>();
     TextView textViewPeers;
     @Override
@@ -52,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             connection.setNotifier(Datahop.getWifiConnectionNotifier());
             Datahop.startDiscovery();
             Datahop.start();
+            requestForPermissions();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,6 +183,68 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        Log.d(TAG, "Permissions " + requestCode + " " + permissions + " " + grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    Log.d(TAG, "Location accepted");
+                    //timers.setLocationPermission(true);
+                    //if(timers.getStoragePermission())startService();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Log.d(TAG, "Location not accepted");
+
+                }
+                break;
+            }
+            case PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE:
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    Log.d(TAG, "Storage accepted");
+                    //timers.setStoragePermission(true);
+                    //new CreateWallet(getApplicationContext()).execute();
+                    //if(timers.getLocationPermission())startService();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    //G.Log(TAG,"Storage not accepted");
+
+                }
+        }
+
+        // other 'case' lines to check for other
+        // permissions this app might request.
+
+    }
+
+    private void requestForPermissions() {
+        Log.d(TAG, "Permissions request");
+        if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_FINE_LOCATION);
+                }
+            });
+            builder.show();
+        }
+
+
     }
 
     @Override
