@@ -322,6 +322,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
     public void onDestroy() {
         super.onDestroy();
         if(Datahop.isNodeOnline()) {
+            try {
+                Datahop.stopDiscovery();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Datahop.stop();
         }
         Datahop.close();
