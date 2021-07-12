@@ -230,7 +230,21 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                 if(!Datahop.isNodeOnline()) {
                     try {
                         Datahop.startDiscovery();
-                        Datahop.start();
+                        Datahop.start(false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        final Button startWithBootstrapButton = findViewById(R.id.start_button_bootstrap);
+        startWithBootstrapButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(!Datahop.isNodeOnline()) {
+                    try {
+                        Datahop.startDiscovery();
+                        Datahop.start(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -380,7 +394,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             hotspot.setNotifier(Datahop.getWifiHotspotNotifier());
             connection.setNotifier(Datahop.getWifiConnectionNotifier());
             Datahop.startDiscovery();
-            Datahop.start();
+            Datahop.start(true);
             loadData();
         } catch (Exception e) {
             e.printStackTrace();
