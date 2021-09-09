@@ -194,6 +194,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    try {
+                        Log.d("Matrix : ", Datahop.matrix());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 try {
@@ -334,16 +339,16 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        Datahop.close();
         if(Datahop.isNodeOnline()) {
+            Datahop.stop();
             try {
                 Datahop.stopDiscovery();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Datahop.stop();
         }
-        Datahop.close();
+        super.onDestroy();
     }
 
     @Override
