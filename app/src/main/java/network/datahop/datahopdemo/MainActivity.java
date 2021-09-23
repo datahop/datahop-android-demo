@@ -36,8 +36,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import datahop.Datahop;
 import datahop.ConnectionManager;
+import datahop.Datahop;
 import datahop.types.Types;
 import network.datahop.blediscovery.BLEAdvertising;
 import network.datahop.blediscovery.BLEServiceDiscovery;
@@ -189,6 +189,12 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                     }
 
                     try {
+                        Log.d("peerinfo : ",Datahop.peerInfo());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
                         Types.StringSlice peers = Types.StringSlice.parseFrom(Datahop.peers());
                         Log.d("Peers : ", peers.getOutputList().toString());
                     } catch (Exception e) {
@@ -234,8 +240,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             public void onClick(View v) {
                 if(!Datahop.isNodeOnline()) {
                     try {
-                        Datahop.startDiscovery();
                         Datahop.start(false);
+                        Datahop.startDiscovery(true, true, true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -248,8 +254,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             public void onClick(View v) {
                 if(!Datahop.isNodeOnline()) {
                     try {
-                        Datahop.startDiscovery();
                         Datahop.start(true);
+                        Datahop.startDiscovery(true, true, true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -398,8 +404,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             bleDiscoveryDriver.setNotifier(Datahop.getDiscoveryNotifier());
             hotspot.setNotifier(Datahop.getWifiHotspotNotifier());
             connection.setNotifier(Datahop.getWifiConnectionNotifier());
-            Datahop.startDiscovery();
             Datahop.start(true);
+            Datahop.startDiscovery(true, true, true);
             loadData();
         } catch (Exception e) {
             e.printStackTrace();
