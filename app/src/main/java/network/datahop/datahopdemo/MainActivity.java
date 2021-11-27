@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
 
     ArrayList<String> activePeers = new ArrayList<>();
     TextView textViewPeers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,14 +78,14 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                 Manifest.permission.ACCESS_FINE_LOCATION)));
         Log.d("shouldShowRequest ", String.valueOf(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION)));
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
 
-       locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Activity self = this;
-        if(!isGpsEnabled()){
+        if (!isGpsEnabled()) {
             LocationRequest locationRequest = LocationRequest.create();
             locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
             LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
@@ -128,7 +131,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                 }
             });
         } else {
-            start();
+            try {
+                start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -142,17 +149,21 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                 switch (resultCode) {
                     case Activity.RESULT_OK:
                         // All required changes were successfully made
-                        Toast.makeText(getApplicationContext(),"User has clicked on OK - So GPS is on", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "User has clicked on OK - So GPS is on", Toast.LENGTH_SHORT).show();
                         try {
                             TimeUnit.SECONDS.sleep(1);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        start();
+                        try {
+                            start();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case Activity.RESULT_CANCELED:
                         // The user was asked to change settings, but chose not to
-                        Toast.makeText(getApplicationContext(),"User has clicked on NO, THANKS - So GPS is still off.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "User has clicked on NO, THANKS - So GPS is still off.", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
@@ -165,64 +176,17 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         super.onStart();
         Log.d("Node Status onStart", String.valueOf(Datahop.isNodeOnline()));
 
-        if(Datahop.isNodeOnline()) {
+        if (Datahop.isNodeOnline()) {
             loadData();
         }
 
-        final Button logButton = findViewById(R.id.log_button);
+        final Button logButton = findViewById(R.id.refresh);
         logButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("Online : ", String.valueOf(Datahop.isNodeOnline()));
-                if(Datahop.isNodeOnline()) {
-                    try {
-                        Types.StringSlice addrs = Types.StringSlice.parseFrom(Datahop.addrs());
-                        Log.d("Addrs : ", addrs.getOutputList().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        Types.StringSlice ifaceAddrs = Types.StringSlice.parseFrom(Datahop.interfaceAddrs());
-                        Log.d("IfaceAddrs : ", ifaceAddrs.getOutputList().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        Log.d("peerinfo : ",Datahop.peerInfo());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        Types.StringSlice peers = Types.StringSlice.parseFrom(Datahop.peers());
-                        Log.d("Peers : ", peers.getOutputList().toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        Log.d("Matrix : ", Datahop.matrix());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                try {
-                    Log.d("State : ", Datahop.state().toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
                 try {
                     Types.StringSlice tags = Types.StringSlice.parseFrom(Datahop.getTags());
                     Log.d("Tags : ", tags.getOutputList().toString());
-
-                    if (tags.getOutputList().size() > 0) {
-                        String latestTag = tags.getOutput(tags.getOutputList().size()-1);
-                        Log.d("Latest Tag ", latestTag);
-                        byte[] value = Datahop.get(latestTag);
-                        Log.d("Latest Tag value ",  new String(value, StandardCharsets.UTF_8));
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -238,23 +202,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         final Button startButton = findViewById(R.id.start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(!Datahop.isNodeOnline()) {
+                if (!Datahop.isNodeOnline()) {
                     try {
-                        Datahop.start(false);
-                        Datahop.startDiscovery(true, true, true);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        final Button startWithBootstrapButton = findViewById(R.id.start_button_bootstrap);
-        startWithBootstrapButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(!Datahop.isNodeOnline()) {
-                    try {
-                        Datahop.start(true);
+                        Datahop.startPrivate(false, "pnet");
                         Datahop.startDiscovery(true, true, true);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -266,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         final Button stopButton = findViewById(R.id.stop_button);
         stopButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(Datahop.isNodeOnline()) {
+                if (Datahop.isNodeOnline()) {
                     try {
                         Datahop.stopDiscovery();
                         Datahop.stop();
@@ -280,11 +230,28 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         final Button contentButton = findViewById(R.id.add_content);
         contentButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(Datahop.isNodeOnline()) {
-                    String unixTime = String.valueOf(System.currentTimeMillis() / 1000L);
-                    String value = "Stats called at "+unixTime;
+                if (Datahop.isNodeOnline()) {
                     try {
-                        Datahop.add(unixTime, value.getBytes());
+                        Context context = getApplicationContext();
+                        CharSequence text = "Please sit back, Content is being added";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Datahop.addContent();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        final Button loopButton = findViewById(R.id.add_content_in_loop);
+        loopButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (Datahop.isNodeOnline()) {
+                    try {
+                        Datahop.startMeasurements(10000000, 120);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -346,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
     @Override
     public void onDestroy() {
         Datahop.close();
-        if(Datahop.isNodeOnline()) {
+        if (Datahop.isNodeOnline()) {
             Datahop.stop();
             try {
                 Datahop.stopDiscovery();
@@ -363,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         activePeers.add(s);
         this.runOnUiThread(new Runnable() {
             public void run() {
-                textViewPeers.setText(activePeers.toString());
+                textViewPeers.setText("Peers :" + activePeers.toString());
             }
         });
     }
@@ -374,16 +341,16 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         activePeers.remove(s);
         this.runOnUiThread(new Runnable() {
             public void run() {
-                textViewPeers.setText(activePeers.toString());
+                textViewPeers.setText("Peers :" + activePeers.toString());
             }
         });
     }
 
-    public static boolean isGpsEnabled(){
+    public static boolean isGpsEnabled() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
-    public void start() {
+    public void start() throws Exception {
         try {
             BLEServiceDiscovery bleDiscoveryDriver = BLEServiceDiscovery.getInstance(getApplicationContext());
             BLEAdvertising bleAdvertisingDriver = BLEAdvertising.getInstance(getApplicationContext());
@@ -404,7 +371,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             bleDiscoveryDriver.setNotifier(Datahop.getDiscoveryNotifier());
             hotspot.setNotifier(Datahop.getWifiHotspotNotifier());
             connection.setNotifier(Datahop.getWifiConnectionNotifier());
-            Datahop.start(true);
+            Datahop.startPrivate(true, "pnet");
             Datahop.startDiscovery(true, true, true);
             loadData();
         } catch (Exception e) {
@@ -418,9 +385,54 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         try {
             String Id = Datahop.id();
             final TextView textViewID = this.findViewById(R.id.textview_id);
-            textViewID.setText(Id);
+            textViewID.setText("Node ID : " + Id);
+
+            final TextView textViewTags = this.findViewById(R.id.textview_tags);
+            final TextView textViewDU = this.findViewById(R.id.textview_disk_usage);
+            final Handler handler = new Handler();
+            Runnable task = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Types.StringSlice tags = Types.StringSlice.parseFrom(Datahop.getTags());
+                        Log.d("Tags : ", tags.getOutputList().toString());
+                        textViewTags.setText("Content List: " + tags.getOutputList().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        String du = String.valueOf(Datahop.diskUsage());
+                        Log.d("Tags : ", du);
+                        textViewDU.setText("Disk usage: " + calculateProperFileSize(Datahop.diskUsage()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    handler.postDelayed(this, 5000);
+                }
+            };
+            handler.post(task);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    String[] fileSizeUnits = {"bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
+
+    public String calculateProperFileSize(double bytes) {
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        String sizeToReturn = "";
+        int index = 0;
+        for (index = 0; index < fileSizeUnits.length; index++) {
+            if (bytes < 1024) {
+                break;
+            }
+            bytes = bytes / 1024;
+        }
+
+        sizeToReturn = String.valueOf(df.format(bytes)) + " " + fileSizeUnits[index];
+        return sizeToReturn;
     }
 }

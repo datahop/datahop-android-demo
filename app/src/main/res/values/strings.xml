@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Datahop Demo</string>
-    <string name="node_id">Node ID</string>
-    <string name="node_peers">Node Peers</string>
+    <string name="node_id">Node ID :</string>
+    <string name="node_peers">Peers :</string>
 </resources>
