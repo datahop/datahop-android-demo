@@ -1,21 +1,23 @@
 package network.datahop.datahopdemo;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +35,11 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.nio.charset.StandardCharsets;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 2;
     private static final int REQUEST_CHECK_SETTINGS = 111;
+    private static final int EXTERNAL_STORAGE_PERMISSION_CODE = 23;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static LocationManager locationManager;
@@ -72,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
         if (wifi.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
             wifi.setWifiEnabled(true);
         }
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                EXTERNAL_STORAGE_PERMISSION_CODE);
 
         // Ask Location Permission
         Log.d("checkSelfPermission ", String.valueOf(ContextCompat.checkSelfPermission(MainActivity.this,
@@ -137,6 +147,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                 e.printStackTrace();
             }
         }
+        Intent intent = getIntent();
+        handleIntent(intent);
     }
 
     @Override
@@ -204,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             public void onClick(View v) {
                 if (!Datahop.isNodeOnline()) {
                     try {
-                        Datahop.startPrivate(false, "pnet");
+                        Datahop.start(false, true);
                         Datahop.startDiscovery(true, true, true);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -220,38 +232,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
                     try {
                         Datahop.stopDiscovery();
                         Datahop.stop();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        final Button contentButton = findViewById(R.id.add_content);
-        contentButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (Datahop.isNodeOnline()) {
-                    try {
-                        Context context = getApplicationContext();
-                        CharSequence text = "Please sit back, Content is being added";
-                        int duration = Toast.LENGTH_SHORT;
-
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                        Datahop.addContent();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        final Button loopButton = findViewById(R.id.add_content_in_loop);
-        loopButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (Datahop.isNodeOnline()) {
-                    try {
-                        Datahop.startMeasurements(10000000, 120);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -371,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             bleDiscoveryDriver.setNotifier(Datahop.getDiscoveryNotifier());
             hotspot.setNotifier(Datahop.getWifiHotspotNotifier());
             connection.setNotifier(Datahop.getWifiConnectionNotifier());
-            Datahop.startPrivate(true, "pnet");
+            Datahop.start(true, true);
             Datahop.startDiscovery(true, true, true);
             loadData();
         } catch (Exception e) {
@@ -434,5 +414,54 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
 
         sizeToReturn = String.valueOf(df.format(bytes)) + " " + fileSizeUnits[index];
         return sizeToReturn;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        this.handleIntent(intent);
+    }
+
+
+    void handleIntent(Intent intent) {
+        if (intent!= null) {
+            String action = intent.getAction();
+            String type = intent.getType();
+            if (Intent.ACTION_SEND.equals(action) && type != null) {
+//                CircularProgressIndicator progress = findViewById(R.id.progress);
+                if (type.equalsIgnoreCase("text/plain")) {
+                    // TODO do something
+                } else {
+                    Uri selectedUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                    if (selectedUri != null) {
+
+                        String[] projection = {MediaStore.MediaColumns.DATA};
+                        CursorLoader cursorLoader = new CursorLoader(this, selectedUri, projection, null, null, null);
+                        Cursor cursor = cursorLoader.loadInBackground();
+                        int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                        cursor.moveToFirst();
+                        File file = new File(cursor.getString(column_index));
+                        int size = (int) file.length();
+                        byte[] bytes = new byte[size];
+                        try {
+                            BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+                            buf.read(bytes, 0, bytes.length);
+                            buf.close();
+
+                            Datahop.add("/"+file.getName(), bytes, "");
+                        } catch (FileNotFoundException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+//                progress.show();
+            }
+        }
     }
 }

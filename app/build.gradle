@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "network.datahop.datahopdemo"
-        minSdkVersion 24
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -62,8 +62,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "com.google.protobuf:protobuf-java:3.15.8"
 
-    implementation 'network.datahop.libs:datahop:v0.0.13'
-//    implementation(name: 'datahop', ext: 'aar')
-    implementation 'network.datahop.libs:blediscovery:0.0.6'
+//    implementation 'network.datahop.libs:datahop:v0.0.13'
+    implementation(name: 'datahop', ext: 'aar')
+    implementation 'network.datahop.libs:blediscovery:0.0.8'
     implementation 'network.datahop.libs:wifidirect:0.0.3'
 }
