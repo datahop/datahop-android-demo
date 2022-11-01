@@ -358,6 +358,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             e.printStackTrace();
         }
         Log.d("Node Id", Datahop.id());
+        Types.StringSlice s = Types.StringSlice.parseFrom(Datahop.addrs());
+        Log.d("Node addresses", String.valueOf(s));
         Log.d("Node Status onCreate", String.valueOf(Datahop.isNodeOnline()));
     }
 
@@ -428,7 +430,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             String action = intent.getAction();
             String type = intent.getType();
             if (Intent.ACTION_SEND.equals(action) && type != null) {
-//                CircularProgressIndicator progress = findViewById(R.id.progress);
                 if (type.equalsIgnoreCase("text/plain")) {
                     // TODO do something
                 } else {
