@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
 
     ArrayList<String> activePeers = new ArrayList<>();
     TextView textViewPeers;
-
+    ListAdaptor adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -192,52 +194,45 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             loadData();
         }
 
-        final Button logButton = findViewById(R.id.refresh);
+        final Button logButton = findViewById(R.id.log_stat);
         logButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("Online : ", String.valueOf(Datahop.isNodeOnline()));
                 try {
-                    Types.StringSlice tags = Types.StringSlice.parseFrom(Datahop.getTags());
-                    Log.d("Tags : ", tags.getOutputList().toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    Log.d("Size : ", String.valueOf(Datahop.diskUsage()));
+                   Datahop.bitswapStat();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-        final Button startButton = findViewById(R.id.start_button);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (!Datahop.isNodeOnline()) {
-                    try {
-                        Datahop.start(false, true);
-                        Datahop.startDiscovery(true, true, true);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        final Button stopButton = findViewById(R.id.stop_button);
-        stopButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (Datahop.isNodeOnline()) {
-                    try {
-                        Datahop.stopDiscovery();
-                        Datahop.stop();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+//        final Button startButton = findViewById(R.id.start_button);
+//        startButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (!Datahop.isNodeOnline()) {
+//                    try {
+//                        Datahop.start(false, true);
+//                        Datahop.startDiscovery(true, true, true);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//
+//        final Button stopButton = findViewById(R.id.stop_button);
+//        stopButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (Datahop.isNodeOnline()) {
+//                    try {
+//                        Datahop.stopDiscovery();
+//                        Datahop.stop();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -368,24 +363,30 @@ public class MainActivity extends AppCompatActivity implements ConnectionManager
             String Id = Datahop.id();
             final TextView textViewID = this.findViewById(R.id.textview_id);
             textViewID.setText("Node ID : " + Id);
-
-            final TextView textViewTags = this.findViewById(R.id.textview_tags);
+            RecyclerView recyclerView = findViewById(R.id.files);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
             final TextView textViewDU = this.findViewById(R.id.textview_disk_usage);
             final Handler handler = new Handler();
+            Context self = this;
             Runnable task = new Runnable() {
                 @Override
                 public void run() {
                     try {
                         Types.StringSlice tags = Types.StringSlice.parseFrom(Datahop.getTags());
                         Log.d("Tags : ", tags.getOutputList().toString());
-                        textViewTags.setText("Content List: " + tags.getOutputList().toString());
+                        adapter = new ListAdaptor(
+                                self,
+                                tags.getOutputList()
+                        );
+//                        adapter.setClickListener((ListAdaptor.ItemClickListener) self);
+                        recyclerView.setAdapter(adapter);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                     try {
                         String du = String.valueOf(Datahop.diskUsage());
-                        Log.d("Tags : ", du);
+                        Log.d("disk usage : ", du);
                         textViewDU.setText("Disk usage: " + calculateProperFileSize(Datahop.diskUsage()));
                     } catch (Exception e) {
                         e.printStackTrace();
