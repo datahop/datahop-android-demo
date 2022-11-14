@@ -5,71 +5,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="network.datahop.datahopdemo.MainActivity">
-
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="413dp"
-        android:layout_height="305dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="3dp">
-
-        <TextView
-            android:id="@+id/textview_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/node_id"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/textview_peers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/node_peers" />
-
-        <TextView
-            android:id="@+id/textview_tags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Content List: " />
-
-        <TextView
-            android:id="@+id/textview_disk_usage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Disk usage: " />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="6">
 
-        <Button
-            android:id="@+id/stop_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="413dp"
+            android:layout_height="305dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="3dp"
+            android:layout_weight="5">
+
+            <TextView
+                android:id="@+id/textview_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/node_id"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textview_peers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/node_peers" />
+
+            <TextView
+                android:id="@+id/textview_disk_usage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disk usage: " />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/files"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stop" />
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            android:layout_weight="1"
+            android:weightSum="3">
 
-        <Button
-            android:id="@+id/start_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start" />
+<!--            <Button-->
+<!--                android:id="@+id/stop_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Stop"-->
+<!--                android:layout_weight="1"/>-->
 
-        <Button
-            android:id="@+id/refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Refresh" />
+<!--            <Button-->
+<!--                android:id="@+id/start_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Start"-->
+<!--                android:layout_weight="1"/>-->
 
+            <Button
+                android:id="@+id/log_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log Stat"
+                android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
