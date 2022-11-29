@@ -63,6 +63,8 @@ dependencies {
 
 //    implementation 'network.datahop.libs:datahop:v0.0.13'
     implementation(name: 'datahop', ext: 'aar')
-    implementation 'network.datahop.libs:blediscovery:0.0.8'
-    implementation 'network.datahop.libs:wifidirect:0.0.3'
+//    implementation 'network.datahop.libs:blediscovery:0.0.8'
+    implementation(name: 'blediscovery', ext: 'aar')
+    implementation(name: 'wifidirect', ext: 'aar')
+//    implementation 'network.datahop.libs:wifidirect:0.0.3'
 }
